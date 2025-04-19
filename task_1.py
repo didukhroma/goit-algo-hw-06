@@ -2,15 +2,42 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 G = nx.Graph()
+
 graph = {
-    "Market Square": {"Castle Street": 3},
-    "Castle Street": {"City Hospital": 2, },
-    "City Hospital": {"Bus Station": 4, },
-    "Bus Station": {'Rakoczi Street': 3, "Market Square": 5},
-    "Rakoczi Street": {"Vasarosnameny Road": 5},
-    "Vasarosnameny Road": { "Kisvarda Castle": 6},
-    "Kisvarda Castle": { "Market Square": 7}
+    "Market Square": {
+        "Castle Street": 3,
+        "Bus Station": 5,
+        "Kisvarda Castle": 7
+    },
+    "Castle Street": {
+        "City Hospital": 2,
+        "Market Square": 3,
+        "Rakoczi Street": 4 
+    },
+    "City Hospital": {
+        "Bus Station": 4,
+        "Vasarosnameny Road": 6 
+    },
+    "Bus Station": {
+        "Rakoczi Street": 3,
+        "Market Square": 5,
+        "City Hospital": 4
+    },
+    "Rakoczi Street": {
+        "Vasarosnameny Road": 5,
+        "Castle Street": 4,
+        "Bus Station": 3 
+    },
+    "Vasarosnameny Road": {
+        "Kisvarda Castle": 6,
+        "City Hospital": 6  
+    },
+    "Kisvarda Castle": {
+        "Market Square": 7,
+        "Vasarosnameny Road": 6  
+    }
 }
+
 # Bus stops
 bus_stops = graph.keys()
 G.add_nodes_from(bus_stops)
@@ -42,7 +69,7 @@ nx.draw_networkx_labels(G, pos, font_size=10)
 edge_labels = nx.get_edge_attributes(G, 'weight')
 nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=9, label_pos=0.5)
 plt.title("Kisvarda Bus Transport Network (with Driving Times)", fontsize=14)
-plt.text(0.5, -0.5, f"Quantity of nodes: {nx.number_of_nodes(G)}", ha='center', va='bottom', fontsize=10, color='gray')
-plt.text(0.5, -0.6, f"Quantity of edges: {nx.number_of_edges(G)}", ha='center', va='bottom', fontsize=10, color='gray')
+plt.text(0.7, -0.5, f"Quantity of nodes: {nx.number_of_nodes(G)}", ha='center', va='bottom', fontsize=10, color='gray')
+plt.text(0.7, -0.6, f"Quantity of edges: {nx.number_of_edges(G)}", ha='center', va='bottom', fontsize=10, color='gray')
 plt.axis('off')
 plt.show()
